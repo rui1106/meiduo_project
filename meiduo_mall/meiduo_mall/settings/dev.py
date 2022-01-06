@@ -17,6 +17,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # 添加导包路径
 import sys
+
 sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
 # print(sys.path)
 
@@ -30,7 +31,6 @@ SECRET_KEY = '=0p)a9nkbv5b)%l@$d!a-f&r&cb1ac^nv@%)i$ne&16(7gg$e)'
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -73,7 +73,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'meiduo_mall.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
@@ -137,7 +136,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
@@ -155,7 +153,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 # 日志 logging
 
@@ -183,7 +180,7 @@ LOGGING = {
             'formatter': 'simple'
         },
         'file': {  # 向文件中输出日志
-            'level': 'INFO',
+            'level': 'WARNING',
             'class': 'logging.handlers.RotatingFileHandler',
             'filename': os.path.join(os.path.dirname(BASE_DIR), "logs/meiduo.log"),  # 日志文件的位置
             'maxBytes': 300 * 1024 * 1024,
@@ -200,8 +197,12 @@ LOGGING = {
     }
 }
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+REST_FRAMEWORK = {
+    # 异常处理
+    'EXCEPTION_HANDLER': "meiduo_mall.utils.exceptions.exception_handler",
+}
